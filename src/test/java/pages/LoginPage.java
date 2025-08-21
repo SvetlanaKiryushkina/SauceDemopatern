@@ -1,7 +1,9 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
@@ -14,18 +16,22 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void open(){
+    @Step("Открытие страницы LoginPage")
+    public void open() {
         driver.get(BASE_URL);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(LOGIN_BUTTON));//явное ожидание, т.е после перехода
+        //на страницу, ожидаем пока загрузится кнопка логин
+        //takeScreenshot(driver);//добавляем для создания скриншота, но целесообразно делать только при падении теста
     }
 
-    public void login(String user, String password){
+    @Step("Вход в магазин с именем пользователя: '{user}' и пароль: '{password}'")
+    public void login(String user, String password) {
         driver.findElement(USERNAME_INPUT).sendKeys(user);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
         driver.findElement(LOGIN_BUTTON).click();
     }
 
-    public String getErrorMessage(){
+    public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
-
 }
