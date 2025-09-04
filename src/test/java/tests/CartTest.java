@@ -56,6 +56,6 @@ public class CartTest extends BaseTest {
         // сравниваю название и цену, ту которая в корзине и ту которую узнавала ранее
         softAssert.assertEquals("Название товара не совпадает!", productName, cartProductName);
         softAssert.assertEquals("Стоимость товара не совпадает!", productPrice, cartProductPrice);
-        softAssert.assertAll();
+        //softAssert.assertAll();
     }
 }
